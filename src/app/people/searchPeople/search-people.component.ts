@@ -9,8 +9,8 @@ import { Person } from 'src/app/models/person.model';
   styleUrls: ['./search-people.component.css']
 })
 export class SearchPeopleComponent implements OnInit {
-  firstName: any;
-  lastName: any;
+  firstName: string;
+  lastName: string;
   people: Person[];
 
   constructor(private _peopleService: PeopleService) { }
@@ -18,8 +18,14 @@ export class SearchPeopleComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchPeople(personForm: NgForm): void {
-    this._peopleService.searchPeople(this.firstName || this.lastName).subscribe(people => {
+  searchPeople(): void {
+    const person = new Person(
+      null,
+      this.firstName,
+      this.lastName
+    );
+   
+    this._peopleService.searchPeople(person).subscribe(people => {
       this.people = people;
     });
   }

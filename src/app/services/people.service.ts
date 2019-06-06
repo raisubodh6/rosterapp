@@ -10,8 +10,8 @@ import { environment } from '../../environments/environment';
 export class PeopleService {
   apiUrl: string = environment.apiUrl;
   
-  searchPeople(name: string): Observable<Person[]> {
-    return this.httpClient.get<Person[]>(`${this.apiUrl}${name}`);
+  searchPeople(person: Person): Observable<Person[]> {
+    return this.httpClient.post<Person[]>(this.apiUrl, person);
   }
 
   listPeople(): Observable<Person[]> {
